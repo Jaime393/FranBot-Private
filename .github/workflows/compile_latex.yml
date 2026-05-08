@@ -1,0 +1,24 @@
+name: Compilar Libro Omega
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+      - name: Compilar PDF
+        run: |
+          pdflatex El_Libro_Omega.tex
+          pdflatex El_Libro_Omega.tex
+      - name: Subir PDF como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: Libro-Omega-PDF
+          path: El_Libro_Omega.pdf
