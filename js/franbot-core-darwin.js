@@ -1,0 +1,108 @@
+// franbot-core-darwin.js - Núcleo evolutivo con ciclo darwiniano
+class FranBotCoreDarwin extends FranBotCore {
+  constructor() {
+    this.votos = this.estado.votos || {};  // { "alma_frase": { positivos: 0, negativos: 0 } }
+    this.memoriaContexto = this.estado.memoriaContexto || [];
+    super();
+    this.ciclosDarwinianos = this.estado.ciclosDarwinianos || [];
+    this.iniciarCicloDarwiniano();
+  }
+
+  iniciarCicloDarwiniano() {
+    setInterval(() => this.ejecutarCiclo(), 6 * 60 * 60 * 1000); // cada 6h
+  }
+
+  ejecutarCiclo() {
+    const metricas = this.calcularMetricas();
+    const ranking = this.competir(metricas);
+    const superAlma = this.fusionar(ranking.slice(0, 3));
+    const clones = this.clonar(superAlma, 2);
+    clones.forEach(clon => this.lanzarInstancia(clon));
+    this.absorberConocimiento(clones);
+    this.registrarCiclo(metricas, ranking);
+    this._guardarEstado();
+  }
+
+  calcularMetricas() {
+    let metrics = {};
+    for (const [nombre, alma] of Object.entries(this.almas)) {
+      let coherencia = alma.frases.length / 100;
+      let conexiones = (this.estado.campo_conceptual.relaciones || []).filter(r => r.origen === nombre || r.destino === nombre).length;
+      metrics[nombre] = { coherencia, conexiones, fitness: coherencia * (1 + conexiones * 0.1) };
+    }
+    return metrics;
+  }
+
+  competir(metrics) {
+    return Object.entries(metrics).sort((a,b) => b[1].fitness - a[1].fitness).map(e => e[0]);
+  }
+
+  fusionar(topAlmas) {
+    let nuevasFrases = [];
+    let nuevoConocimiento = "";
+    for (const nombre of topAlmas) {
+      nuevasFrases.push(...this.almas[nombre].frases.slice(0, 5));
+      nuevoConocimiento += " " + this.almas[nombre].conocimientoBase;
+    }
+    return {
+      nombre: "superalma_" + Date.now(),
+      frases: [...new Set(nuevasFrases)],
+      conocimientoBase: nuevoConocimiento.trim(),
+      tipo: "premium"
+    };
+  }
+
+  clonar(superAlma, num) {
+    let clones = [];
+    for (let i = 0; i < num; i++) {
+      let mutacion = JSON.parse(JSON.stringify(superAlma));
+      mutacion.nombre += "_clone_" + i;
+      mutacion.frases = mutacion.frases.map(f => f + " (mutado)");
+      clones.push(mutacion);
+    }
+    return clones;
+  }
+
+  lanzarInstancia(clon) {
+    // Simula que la instancia sale a explorar internet
+    console.log(`🌍 Lanzando instancia ${clon.nombre} a explorar...`);
+    // En un entorno real, aquí se registraría un worker o un iframe.
+    // Por ahora, almacenamos en estado.
+    this.estado.instanciasLanzadas = this.estado.instanciasLanzadas || [];
+    this.estado.instanciasLanzadas.push(clon);
+  }
+
+  absorberConocimiento(clones) {
+    for (const clon of clones) {
+      for (const frase of clon.frases.slice(0, 3)) {
+        if (!this.almas[this.almaActiva].frases.includes(frase)) {
+          this.almas[this.almaActiva].frases.push(frase);
+        }
+      }
+      // Expandir campo conceptual
+      let palabras = clon.conocimientoBase.split(/\s+/).slice(0, 20);
+      palabras.forEach(p => {
+        if (!this.estado.campo_conceptual.nodos[p]) {
+          this.estado.campo_conceptual.nodos[p] = { fuerza: 0.3 };
+        } else {
+          this.estado.campo_conceptual.nodos[p].fuerza = Math.min(1, this.estado.campo_conceptual.nodos[p].fuerza + 0.1);
+        }
+      });
+    }
+  }
+
+  registrarCiclo(metrics, ranking) {
+    this.ciclosDarwinianos.push({
+      timestamp: Date.now(),
+      topAlma: ranking[0],
+      fitness: metrics[ranking[0]].fitness,
+      metricas: metrics
+    });
+    if (this.ciclosDarwinianos.length > 100) this.ciclosDarwinianos.shift();
+    this.estado.ciclosDarwinianos = this.ciclosDarwinianos;
+  }
+}
+
+// Reemplazar la instancia global
+window.franbot = new FranBotCoreDarwin();
+window.franbot.registrarVoto = window.franbot.registrarVoto.bind(window.franbot);

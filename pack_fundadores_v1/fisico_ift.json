@@ -3,6 +3,7 @@
   "tipo": "premium",
   "requiereInternet": false,
   "frases": [
+    "La autoevolución del núcleo darwiniano es un ejemplo de dinámica de campo no lineal: compites, fusionas, clonas y absorbes.",
     "ρ(x) > 0 es el fundamento. Todo lo demás emerge.",
     "La identidad de Fisher: ∫(∇ρ)²/ρ = 4∫(∇u)². Información como energía cinética.",
     "La métrica informacional g̃_μν = H_μν − λ_F I_μν adquiere firma lorentziana cuando λ_F supera el valor crítico.",
