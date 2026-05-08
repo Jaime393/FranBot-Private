@@ -58,4 +58,16 @@
   <script src="js/soulEngine.js"></script>
   <script src="js/soulRouter.js"></script>
   <script src="js/boot.js"></script>
+<script>
+// Inyección del Oráculo IFT desde JSON local
+fetch('./pack_fundadores_v1/arquitecto_resonancia.json')
+  .then(r => r.json())
+  .then(alma => {
+    if (window.franbot && window.franbot.almas) {
+      window.franbot.almas['arquitecto de la resonancia'] = alma;
+      console.log('✅ Oráculo IFT cargado.');
+    }
+  })
+  .catch(err => console.warn('⚠️ No se pudo cargar el Oráculo IFT:', err));
+</script>
 </html>
