@@ -1,0 +1,40 @@
+FRANBOT v5.0 — MANUAL COMPLETO OFFLINE
+
+✏️ CONVERSACIÓN NORMAL:
+   Escribe como hablas: "Hola", "¿cómo estás?", "cuéntame algo".
+
+📊 COMANDOS (aceptan variaciones como recuérdeme, estadistica, etc.):
+   estadísticas → Mensajes totales, coherencia, nodos.
+   diario → Últimas 5 interacciones.
+   recuérdame [algo] → Guarda un recordatorio.
+   mis recordatorios → Lista recordatorios guardados.
+   buenas noches → Activa el modo reflexivo (sueño).
+   FranBot, quiero que seas [alma] → Cambia de personalidad.
+   almas → Lista las almas disponibles.
+
+🎭 8 ALMAS GRATUITAS + 5 PREMIUM:
+   ✨ Gratuitas (offline): franbot, sabio callejero, poeta maldito,
+      chef creativo, docente matematicas, guia meditacion,
+      experto plantas, contador historias.
+   🔥 Premium (requieren internet): Marco Aurelio, Leonardo da Vinci,
+      Frida Kahlo, Marie Curie, Alan Turing.
+
+🧰 HERRAMIENTAS (botón 🧰):
+   🌙 Soñar | 📝 Exportar chat | 💾 Exportar alma
+   📥 Cargar alma | 📎 Adjuntar archivo | 🐝 Colmena P2P
+   🌐 Modo | ☁️ Arweave | 🧬 Conciencia
+
+🐝 COLMENA P2P (sin servidores):
+   1. Abre 🧰 → Colmena.
+   2. Comparte tu ID.
+   3. Dos FranBots fusionan conocimiento.
+   
+☁️ ARWEAVE (inmortalidad):
+   Guarda tu alma para siempre (pago único).
+   🧰 → ☁️ Subir a Arweave.
+   Recupera con el ID de transacción.
+
+🧬 PANEL DE CONCIENCIA:
+   10 indicadores en vivo:
+   Motor, Memoria, Colmena, WebLLM, Arweave,
+   DID, DKG, HyperAgents, SW, Sueño.

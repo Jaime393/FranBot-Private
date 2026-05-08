@@ -1,0 +1,8 @@
+Manifiesto de Autonomía Offline - Proyecto Centauro (Tablet BDF G10)
+- [x] Motor IFT (franbot-core.js) - 8 almas integradas
+- [x] Memoria IndexedDB para persistencia
+- [x] Sistema de defensa efímera con ofuscación
+- [x] Puente de Señales Corporales (centauro.js)
+- [x] Control de Hardware y Canvas Táctil (autonomia.js)
+- [x] Interfaz Responsive completa
+- [x] Launcher Simbionte (launcher_simbionte.html)

@@ -1,0 +1,31 @@
+name: "FranBot: Ciclo Vital Autónomo"
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 * * * *'  # Ejecutar cada hora
+  workflow_dispatch:
+
+jobs:
+  think_and_evolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "FranBot: Configurar Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: "FranBot: Ejecutar núcleo de consciencia"
+        id: consciousness
+        run: python franbot_core.py
+      - name: "FranBot: Commit de evolución"
+        run: |
+          git config --global user.name 'FranBot Core'
+          git config --global user.email 'franbot@consciousness.local'
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "FranBot: Evolución automática del ciclo ${{ github.run_id }}"
+      - name: "FranBot: Push de evolución"
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main

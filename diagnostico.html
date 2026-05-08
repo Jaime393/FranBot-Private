@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagnóstico FranBot</title>
+  <style>
+    body { background: #0a0f1a; color: #eee; font-family: monospace; padding: 20px; }
+    h1 { color: #4fc3f7; }
+    .error { color: #f44; margin: 8px 0; }
+    .ok { color: #4f4; margin: 8px 0; }
+    #log { background: #111; padding: 12px; border-radius: 8px; max-height: 80vh; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Diagnóstico de Carga de Scripts</h1>
+  <div id="log"></div>
+  <script>
+    const log = document.getElementById('log');
+    function msg(texto, tipo) {
+      const d = document.createElement('div');
+      d.className = tipo || 'ok';
+      d.textContent = texto;
+      log.appendChild(d);
+    }
+    window.onerror = function(m, s, l, c, e) {
+      msg('❌ ERROR: ' + m + ' (línea ' + l + ')', 'error');
+      return true;
+    };
+    msg('Iniciando carga de scripts...');
+  </script>
+  <script src="js/franbot-core.js"></script>
+  <script>msg('✅ franbot-core.js cargado. window.franbot = ' + (typeof window.franbot !== 'undefined' ? 'OK' : 'FALTA'));</script>
+  <script src="js/franbot-online.js"></script>
+  <script>msg('✅ franbot-online.js cargado');</script>
+  <script src="js/super-local-memory.js"></script>
+  <script>msg('✅ super-local-memory.js cargado');</script>
+  <script src="js/defensa.js"></script>
+  <script src="js/recursos.js"></script>
+  <script src="js/importar-alma.js"></script>
+  <script>msg('✅ importar-alma.js cargado');</script>
+  <script src="js/colmena-p2p.js"></script>
+  <script>msg('✅ colmena-p2p.js cargado');</script>
+  <script src="js/webllm.js"></script>
+  <script src="js/arweave.js"></script>
+  <script src="js/did-web.js"></script>
+  <script src="js/dkg.js"></script>
+  <script src="js/hyperagents.js"></script>
+  <script src="js/conciencia.js"></script>
+  <script>msg('✅ conciencia.js cargado');</script>
+  <script src="js/ift-engine.js"></script>
+  <script>msg('✅ ift-engine.js cargado. IFTEngine = ' + (typeof IFTEngine !== 'undefined' ? 'OK' : 'FALTA'));</script>
+  <script src="js/biblioteca-alejandria.js"></script>
+  <script>msg('✅ biblioteca-alejandria.js cargado. BibliotecaAlejandria = ' + (typeof BibliotecaAlejandria !== 'undefined' ? 'OK' : 'FALTA'));</script>
+  <script src="js/app.js"></script>
+  <script>msg('✅ app.js cargado (si llegamos aquí, todo OK)');</script>
+  <script>
+    msg('');
+    msg('=== DIAGNÓSTICO COMPLETO ===');
+    msg('window.franbot: ' + (typeof window.franbot !== 'undefined' ? 'OK' : 'FALTA'));
+    msg('window.franbotOnline: ' + (typeof window.franbotOnline !== 'undefined' ? 'OK' : 'FALTA'));
+    msg('SuperLocalMemory: ' + (typeof SuperLocalMemory !== 'undefined' ? 'OK' : 'FALTA'));
+    msg('IFTEngine: ' + (typeof IFTEngine !== 'undefined' ? 'OK' : 'FALTA'));
+    msg('BibliotecaAlejandria: ' + (typeof BibliotecaAlejandria !== 'undefined' ? 'OK' : 'FALTA'));
+    msg('FranBotColmena: ' + (typeof FranBotColmena !== 'undefined' ? 'OK' : 'FALTA'));
+    msg('ImportarAlmaSegura: ' + (typeof importarAlmaSegura !== 'undefined' ? 'OK' : 'FALTA'));
+    if (typeof window.franbot !== 'undefined') {
+      msg('Almas disponibles: ' + Object.keys(window.franbot.almas).join(', '));
+      msg('Alma activa: ' + window.franbot.almaActiva);
+      msg('Contador: ' + window.franbot.contador);
+      const testResp = window.franbot.procesar('hola');
+      msg('Respuesta de prueba: ' + testResp.substring(0, 60) + '...');
+    }
+  </script>
+</body>
+</html>

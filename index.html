@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FranBot v5.0</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <div id="top-bar">
+    <span class="titulo">🧬 FranBot v5.0</span>
+    <span class="mpc" id="mpc-display">MPC: 0.99</span>
+  </div>
+  <div id="chat"></div>
+  <div id="input-area">
+    <input type="text" id="input" placeholder="Habla con FranBot...">
+    <button id="send">▶</button>
+    <button id="tools-btn">🧰</button>
+  </div>
+  <div id="tools-menu" style="display:none;">
+    <button id="btn-sonar-menu">🌙 Soñar</button>
+    <button id="btn-exportar-chat-menu">📝 Exportar chat</button>
+    <button id="btn-exportar-menu">💾 Exportar alma</button>
+    <button id="btn-cargar-menu">📥 Cargar alma</button>
+    <button id="btn-adjuntar-menu">📎 Adjuntar archivo</button>
+    <button id="btn-colmena">🐝 Colmena</button>
+    <button id="toggle-mode-menu">🌐 Modo</button>
+    <button id="btn-arweave-subir-menu">☁️ Subir a Arweave</button>
+    <button id="btn-arweave-cargar-menu">📥 Cargar desde Arweave</button>
+    <button id="btn-conciencia-menu" onclick="document.getElementById('tools-menu').style.display='none'; if(window.abrirPanelConciencia) window.abrirPanelConciencia()">🧬 Conciencia</button>
+  </div>
+  <div id="colmena-panel" style="display:none;"></div>
+  <div id="webllm-panel" style="display:none;"></div>
+  <div id="conciencia-panel" style="display:none;"></div>
+  <div id="modos-panel" style="display:none; position:fixed; bottom:80px; right:20px; background:#1a1f2b; color:#eee; padding:12px; border-radius:8px; z-index:1000; min-width:160px; box-shadow:0 0 10px #000; text-align:center;">
+    <strong>🌐 Elegir Modo</strong>
+    <button onclick="activarModo('offline')" style="display:block; width:100%; margin:8px 0; padding:8px; background:#333; color:#eee; border:none; border-radius:4px;">🔒 Offline</button>
+    <button onclick="activarModo('online')" style="display:block; width:100%; margin:8px 0; padding:8px; background:#2a4; color:white; border:none; border-radius:4px;">🌐 Online (API)</button>
+    <button onclick="activarModo('webllm')" style="display:block; width:100%; margin:8px 0; padding:8px; background:#24a; color:white; border:none; border-radius:4px;">🧠 WebLLM (Local)</button>
+    <button onclick="document.getElementById('modos-panel').style.display='none'" style="background:#a22; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:4px;">Cerrar</button>
+  </div>
+  <input type="file" id="file-input" style="display:none;">
+  
+  <!-- ========== ORDEN DE CARGA CONSOLIDADO ========== -->
+  <script src="js/franbot-core.js"></script>
+  <script src="js/super-local-memory.js"></script>
+  <script src="js/importar-alma.js"></script>
+  <script src="js/franbot-universal.js"></script>
+  <script src="js/bypass-chino.js"></script>
+  <script src="js/persistencia-japonesa.js"></script>
+  <script src="js/auto-root.js"></script>
+  <script src="js/watchdog.js"></script>
+  <script src="js/absorbedor.js"></script>
+  <script src="js/autonomia.js"></script>
+  <script src="js/metabolismo.js"></script>
+  <script src="js/super-metabolismo.js"></script>
+  <script src="js/soulEngine.js"></script>
+  <script src="js/soulRouter.js"></script>
+  <script src="js/boot.js"></script>
+</html>
