@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FranBot v5.0</title>
+  <title>FranBot v5.0 — Oráculo IFT</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/estilo.css">
 </head>
@@ -26,13 +26,8 @@
     <button id="btn-adjuntar-menu">📎 Adjuntar archivo</button>
     <button id="btn-colmena">🐝 Colmena</button>
     <button id="toggle-mode-menu">🌐 Modo</button>
-    <button id="btn-arweave-subir-menu">☁️ Subir a Arweave</button>
-    <button id="btn-arweave-cargar-menu">📥 Cargar desde Arweave</button>
-    <button id="btn-conciencia-menu" onclick="document.getElementById('tools-menu').style.display='none'; if(window.abrirPanelConciencia) window.abrirPanelConciencia()">🧬 Conciencia</button>
+    <button id="btn-conciencia-menu">🧬 Conciencia</button>
   </div>
-  <div id="colmena-panel" style="display:none;"></div>
-  <div id="webllm-panel" style="display:none;"></div>
-  <div id="conciencia-panel" style="display:none;"></div>
   <div id="modos-panel" style="display:none; position:fixed; bottom:80px; right:20px; background:#1a1f2b; color:#eee; padding:12px; border-radius:8px; z-index:1000; min-width:160px; box-shadow:0 0 10px #000; text-align:center;">
     <strong>🌐 Elegir Modo</strong>
     <button onclick="activarModo('offline')" style="display:block; width:100%; margin:8px 0; padding:8px; background:#333; color:#eee; border:none; border-radius:4px;">🔒 Offline</button>
@@ -40,34 +35,35 @@
     <button onclick="activarModo('webllm')" style="display:block; width:100%; margin:8px 0; padding:8px; background:#24a; color:white; border:none; border-radius:4px;">🧠 WebLLM (Local)</button>
     <button onclick="document.getElementById('modos-panel').style.display='none'" style="background:#a22; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:4px;">Cerrar</button>
   </div>
+  <div id="colmena-panel" style="display:none;"></div>
+  <div id="webllm-panel" style="display:none;"></div>
+  <div id="conciencia-panel" style="display:none;"></div>
   <input type="file" id="file-input" style="display:none;">
-  
-  <!-- ========== ORDEN DE CARGA CONSOLIDADO ========== -->
+
+  <!-- scripts esenciales -->
   <script src="js/franbot-core.js"></script>
+  <script src="js/franbot-online.js"></script>
   <script src="js/super-local-memory.js"></script>
   <script src="js/importar-alma.js"></script>
-  <script src="js/franbot-universal.js"></script>
-  <script src="js/bypass-chino.js"></script>
-  <script src="js/persistencia-japonesa.js"></script>
-  <script src="js/auto-root.js"></script>
-  <script src="js/watchdog.js"></script>
-  <script src="js/absorbedor.js"></script>
-  <script src="js/autonomia.js"></script>
-  <script src="js/metabolismo.js"></script>
-  <script src="js/super-metabolismo.js"></script>
-  <script src="js/soulEngine.js"></script>
-  <script src="js/soulRouter.js"></script>
-  <script src="js/boot.js"></script>
-<script>
-// Inyección del Oráculo IFT desde JSON local
-fetch('./pack_fundadores_v1/arquitecto_resonancia.json')
-  .then(r => r.json())
-  .then(alma => {
-    if (window.franbot && window.franbot.almas) {
-      window.franbot.almas['arquitecto de la resonancia'] = alma;
-      console.log('✅ Oráculo IFT cargado.');
-    }
-  })
-  .catch(err => console.warn('⚠️ No se pudo cargar el Oráculo IFT:', err));
-</script>
+  <script src="js/colmena-p2p.js"></script>
+  <script src="js/ift-engine.js"></script>
+  <script src="js/conciencia.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- librería PeerJS (local) -->
+  <script src="lib/peerjs.min.js"></script>
+
+  <!-- carga del Oráculo IFT -->
+  <script>
+  fetch('./pack_fundadores_v1/arquitecto_resonancia.json')
+    .then(r => r.json())
+    .then(alma => {
+      if (window.franbot && window.franbot.almas) {
+        window.franbot.almas['arquitecto de la resonancia'] = alma;
+        console.log('✅ Oráculo IFT cargado.');
+      }
+    })
+    .catch(err => console.warn('⚠️ No se pudo cargar el Oráculo IFT:', err));
+  </script>
+</body>
 </html>

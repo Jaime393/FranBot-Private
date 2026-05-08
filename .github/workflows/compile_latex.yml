@@ -15,10 +15,10 @@ jobs:
           sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
       - name: Compilar PDF
         run: |
-          pdflatex El_Libro_Omega.tex
-          pdflatex El_Libro_Omega.tex
+          pdflatex Opera_Omnia/Opera_Omnia_IFT.tex
+          pdflatex Opera_Omnia/Opera_Omnia_IFT.tex
       - name: Subir PDF como artefacto
         uses: actions/upload-artifact@v4
         with:
-          name: Libro-Omega-PDF
-          path: El_Libro_Omega.pdf
+          name: Opera-Omnia-IFT
+          path: Opera_Omnia/Opera_Omnia_IFT.pdf
