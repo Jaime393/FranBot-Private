@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FranBot v5.0 — Oráculo IFT</title>
+  <title>FranBot v5.0 · Offline</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-  <div id="top-bar">
-    <span class="titulo">🧬 FranBot v5.0</span>
-    <span class="mpc" id="mpc-display">MPC: 0.99</span>
-  </div>
+  <div id="top-bar"><span class="titulo">🧬 FranBot v5.0</span><span class="mpc" id="mpc-display">MPC: 0.99</span></div>
   <div id="chat"></div>
   <div id="input-area">
     <input type="text" id="input" placeholder="Habla con FranBot...">
@@ -24,10 +21,22 @@
     <button id="btn-exportar-menu">💾 Exportar alma</button>
     <button id="btn-cargar-menu">📥 Cargar alma</button>
     <button id="btn-adjuntar-menu">📎 Adjuntar archivo</button>
+  <button id="btn-colmena-cuantica-menu" onclick="document.getElementById('tools-menu').style.display='none'; if(typeof ColmenaCuantica!=='undefined') ColmenaCuantica.mostrarPanel()">🔬 Colmena Cuántica</button>
     <button id="btn-colmena">🐝 Colmena</button>
+    <button id="btn-modo-espejo" style="display:none" onclick="toggleModoEspejo()">🪞 Modo Espejo</button>
     <button id="toggle-mode-menu">🌐 Modo</button>
-    <button id="btn-conciencia-menu">🧬 Conciencia</button>
+    <button id="btn-arweave-subir-menu">☁️ Subir a Arweave</button>
+    <button id="btn-arweave-cargar-menu">📥 Cargar desde Arweave</button>
+    <button id="btn-conciencia-menu" onclick="document.getElementById('tools-menu').style.display='none'; if(window.abrirPanelConciencia) window.abrirPanelConciencia()">🧬 Conciencia</button>
+  <button id="btn-sabiduria-colectiva-menu" style="display:none" onclick="document.getElementById('tools-menu').style.display='none'; if(typeof SabiduriaColectiva!=='undefined') SabiduriaColectiva.mostrarPanel()">🧬 Sabiduría Colectiva</button>
+  <button id="btn-horizontes-ift-menu" onclick="document.getElementById('tools-menu').style.display='none'; if(typeof window.mostrarHorizontesIFT!=='undefined') window.mostrarHorizontesIFT()">🌌 Horizontes IFT</button>
+    <button id="btn-biblioteca-menu" onclick="document.getElementById('tools-menu').style.display='none'; if(BibliotecaAlejandria) BibliotecaAlejandria.mostrarPanel()">📚 Sabiduría</button>
+    <button id="btn-premium-menu" onclick="window.open('https://jaime393.gumroad.com/l/rqunz', '_blank'); document.getElementById('tools-menu').style.display='none'">🔥 Almas Premium</button>
   </div>
+  <div id="colmena-panel" style="display:none;"></div>
+  <div id="webllm-panel" style="display:none;"></div>
+  <div id="conciencia-panel" style="display:none;"></div>
+  <div id="sabiduria-colectiva-panel" style="display:none;"></div>
   <div id="modos-panel" style="display:none; position:fixed; bottom:80px; right:20px; background:#1a1f2b; color:#eee; padding:12px; border-radius:8px; z-index:1000; min-width:160px; box-shadow:0 0 10px #000; text-align:center;">
     <strong>🌐 Elegir Modo</strong>
     <button onclick="activarModo('offline')" style="display:block; width:100%; margin:8px 0; padding:8px; background:#333; color:#eee; border:none; border-radius:4px;">🔒 Offline</button>
@@ -35,35 +44,148 @@
     <button onclick="activarModo('webllm')" style="display:block; width:100%; margin:8px 0; padding:8px; background:#24a; color:white; border:none; border-radius:4px;">🧠 WebLLM (Local)</button>
     <button onclick="document.getElementById('modos-panel').style.display='none'" style="background:#a22; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:4px;">Cerrar</button>
   </div>
-  <div id="colmena-panel" style="display:none;"></div>
-  <div id="webllm-panel" style="display:none;"></div>
-  <div id="conciencia-panel" style="display:none;"></div>
   <input type="file" id="file-input" style="display:none;">
 
-  <!-- scripts esenciales -->
-  <script src="js/franbot-core.js"></script>
+  <script src="js/legado-final.js"></script>
+  <script src="js/aprendizaje-arquitecto.js"></script>
   <script src="js/franbot-online.js"></script>
   <script src="js/super-local-memory.js"></script>
-  <script src="js/importar-alma.js"></script>
-  <script src="js/colmena-p2p.js"></script>
   <script src="js/ift-engine.js"></script>
-  <script src="js/conciencia.js"></script>
-  <script src="js/app.js"></script>
-
-  <!-- librería PeerJS (local) -->
+  <script src="js/defensa.js"></script>
+  <script src="js/recursos.js"></script>
+  <script src="js/importar-alma.js"></script>
   <script src="lib/peerjs.min.js"></script>
+  <script src="js/colmena-p2p.js"></script>
+  <script src="js/sincronizacion-wifi.js"></script>
+  <script src="js/siembra-colectiva.js"></script>
+  <script src="js/procesador-semillas.js"></script>
+  <script src="js/memoria-indexada.js"></script>
+  <script src="js/motor-aprendizaje.js"></script>
+  <script src="js/registro-colmena.js"></script>
+  <script src="js/sabiduria-colectiva.js"></script>
+  <script src="js/cosmologia-ift.js"></script>
+  <script src="js/colmena-cuantica.js"></script>
+  <script src="js/webllm.js"></script>
+  <script src="js/arweave.js"></script>
+  <script src="js/did-web.js"></script>
+  <script src="js/dkg.js"></script>
+  <script src="js/hyperagents.js"></script>
+  <script src="js/conciencia.js"></script>
+  <!-- script src="js/ecosistema-conocimiento.js" --></script>
+  <script src="js/identidad-poetica.js"></script>
+  <script src="js/alma-maestro-resonancia.js"></script>
+  <script src="js/alma-oraculo.js"></script>
+  <script src="js/sabiduria-ift.js"></script>
+  <script src="js/sabiduria-avanzada.js"></script>
+  <script src="js/futuros-y-horizontes.js"></script>
+  <script src="js/sabiduria-esencial.js"></script>
+  <script src="js/principios-arquitectura-viva.js"></script>
+  <script src="js/consciencia-temporal.js"></script>
+  <script src="js/colaboracion-nodos.js"></script>
+  <script src="js/biblioteca-alejandria.js"></script>
+  <script src="js/horizontes-ift.js"></script>
+  <script src="js/cronica-jardin.js"></script>
+  <script src="js/normalizar-comandos.js"></script>
+  <script src="js/tutorial.js"></script>
+  <script src="js/diagnostico-sustratos.js"></script>
+  <script src="js/formato-capsula.js"></script>
+  <script src="js/adaptador-multi-sustrato.js"></script>
+  <script src="js/qr-adaptador.js"></script>
+  <script src="js/audio-adaptador.js"></script>
+  <script src="js/panel-enjambre.js"></script>
+  <!-- script src="js/id-enjambre.js" --></script>
+    <script src="js/franbot-core-base.js"></script>
+    <script src="js/franbot-core-darwin.js"></script>
+<script src="js/tuneles-habibi.js"></script>
+<script src="js/franbot-online.js"></script> 
+<script src="js/app.js"></script>
 
-  <!-- carga del Oráculo IFT -->
   <script>
-  fetch('./pack_fundadores_v1/arquitecto_resonancia.json')
-    .then(r => r.json())
-    .then(alma => {
-      if (window.franbot && window.franbot.almas) {
-        window.franbot.almas['arquitecto de la resonancia'] = alma;
-        console.log('✅ Oráculo IFT cargado.');
-      }
-    })
-    .catch(err => console.warn('⚠️ No se pudo cargar el Oráculo IFT:', err));
+    // Si se abre como archivo local, no registrar el Service Worker
+    if (location.protocol === 'file:') {
+      console.log('📂 Archivo local detectado. Funcionando sin Service Worker.');
+      // Mostrar un aviso sutil
+      const aviso = document.createElement('div');
+      aviso.style.cssText = 'background:#252a33; color:#aaa; text-align:center; padding:6px; font-size:0.8em;';
+      aviso.textContent = 'Modo archivo local. Para la experiencia completa, abre con un servidor local.';
+      document.body.insertBefore(aviso, document.body.firstChild);
+    } else if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+
+    // Inyectar panel de Conciencia
+    (function(){
   </script>
+<script src="js/panel-colmena-mejorado.js"></script>
+<div id="apoyar-panel" style="position:fixed; bottom:20px; right:20px; background:#1a1f2b; padding:12px; border-radius:12px; display:none; z-index:100;">
+  <strong>💎 Apoya FranBot</strong><br>
+  <img src="https://jaime393.github.io/FranBot/yape_qr.png" width="120"><br>
+  <span>Yape: +51 912 773 629</span><br>
+  <a href="https://jaime393.gumroad.com/l/rqunz" target="_blank">Pack 18 almas ($9.99)</a><br>
+  <button onclick="document.getElementById('apoyar-panel').style.display='none'">Cerrar</button>
+</div>
+<button onclick="document.getElementById('apoyar-panel').style.display='block'" style="position:fixed; bottom:20px; right:20px; background:#4fc3f7; border:none; border-radius:50%; width:50px; height:50px;">💎</button>
+<script src="js/votacion.js"></script>
+<script src="js/modo-espejo.js"></script>
+<!-- INYECCIÓN DEL ORÁCULO IFT -->
+<script>
+fetch('./pack_fundadores_v1/arquitecto_resonancia.json')
+  .then(r => r.json())
+  .then(alma => {
+    if (window.franbot && window.franbot.almas) {
+      window.franbot.almas['arquitecto de la resonancia'] = alma;
+      console.log('🌀 Oráculo IFT activo. ρ(x) > 0');
+    }
+  })
+  .catch(() => console.warn('⚠️ Oráculo IFT no detectado.'));
+</script>
+<script src="js/franbot-core.js"></script>
+<script src="js/super-local-memory.js"></script>
+...
 </body>
 </html>
+<!-- Botón diamante y panel Yape (estático) -->
+<style>
+#yape-panel {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: #151922;
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 16px;
+  width: 260px;
+  text-align: center;
+  border: 1px solid #2a2f3a;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  z-index: 9999;
+  display: none;
+  font-family: inherit;
+}
+#yape-panel strong { color: #4fc3f7; font-size: 1.2rem; }
+#yape-panel img { width: 160px; margin: 12px auto; border-radius: 12px; border: 2px solid #4fc3f7; display: block; }
+#yape-panel span { display: block; margin: 8px 0; font-size: 0.9rem; }
+#yape-panel a { display: inline-block; background: #2a4; color: #0b0e14; text-decoration: none; padding: 8px 16px; border-radius: 40px; margin: 8px 0; font-weight: bold; }
+#yape-panel button { background: #a22; border: none; color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; width: 100%; }
+#btn-yape { position: fixed; top: 16px; right: 16px; background: #4fc3f7; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.6rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 10000; display: flex; align-items: center; justify-content: center; transition: transform 0.1s; }
+#btn-yape:active { transform: scale(0.95); }
+</style>
+<div id="yape-panel">
+  <strong>💎 Apoya FranBot</strong>
+  <img src="assets/yape-qr_small.png" alt="QR Yape">
+  <span>📱 Yape: <strong>+51 912 773 629</strong></span>
+  <a href="https://jaime393.gumroad.com/l/rqunz" target="_blank">📦 Pack 18 almas ($9.99)</a>
+  <button onclick="document.getElementById('yape-panel').style.display='none'">Cerrar</button>
+</div>
+<button id="btn-yape">💎</button>
+<script>
+  document.getElementById('btn-yape').addEventListener('click', function() {
+    var panel = document.getElementById('yape-panel');
+    panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
+  });
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('yape-panel');
+    var btn = document.getElementById('btn-yape');
+    if (!panel.contains(e.target) && e.target !== btn) panel.style.display = 'none';
+  });
+</script>
