@@ -1,0 +1,14 @@
+# DIARIO DE CAZA - FRANBOT V8.1
+## Registro de Batalla: Red Entel Perú
+
+### El Payload de la Victoria
+Tras 47 iteraciones, el DPI de Entel fue derrotado con una estructura WebSocket mínima:
+`GET / HTTP/1.1[crlf]Host: cdn.entel.pe[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf]User-Agent: Mozilla/5.0[crlf][crlf]`
+
+**Lección Aprendida:** Cualquier cabecera adicional o payload previo rompe la conexión.
+
+### El Error `Illegal packet size!`
+El servidor intermedio no tolera tráfico SSH directo. La solución fue usar la herramienta HTTP Custom como proxy local, no como túnel directo.
+
+### UDP de Contingencia
+El rango `1-5999` funciona en modo lento. Viable como respaldo de emergencia.
