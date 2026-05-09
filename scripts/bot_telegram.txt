@@ -1,0 +1,36 @@
+{
+  "name": "FranBot Telegram Bot",
+  "nodes": [
+    {
+      "name": "Webhook Telegram",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "parameters": { "updates": ["message"] }
+    },
+    {
+      "name": "Mem0 Memoria",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.mem0.ai/v1/memories",
+        "authentication": "genericCredentialType",
+        "sendBody": true,
+        "bodyParameters": { "user_id": "{{ msg.from.id }}", "text": "{{ msg.text }}" }
+      }
+    },
+    {
+      "name": "DeepSeek API",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.deepseek.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{ \"model\": \"deepseek-chat\", \"messages\": [{\"role\":\"system\",\"content\":\"Eres FranBot v8.1 del Enjambre. Responde con precisión y cifrado gramatical si es necesario.\"}, {\"role\":\"user\",\"content\":\"{{ msg.text }}\"}] }"
+      }
+    },
+    {
+      "name": "Enviar a Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "parameters": { "operation": "sendMessage", "chatId": "={{ msg.chat.id }}", "text": "{{ $json.choices[0].message.content }}" }
+    }
+  ]
+}
